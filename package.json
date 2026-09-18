@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=3000 DEBUG=DSWSSR-2026:* node ./bin/www",
+    "start": "PORT=3000 DEBUG=DSWSSR-2026:* node ./server/bin/www",
     "greet": "echo ´hola Mundo´"
   },
   "dependencies": {
