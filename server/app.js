@@ -1,18 +1,47 @@
 //funcion para manejar errores
-var createError = require('http-errors');
+//❌var createError = require('http-errors');
+import createError from 'http-errors'
+
 //importa el framework express
-var express = require('express');
+//❌var express = require('express');
+
+import express from 'express'
 //importa modulos para manejar rutas
-var path = require('path');
+
+//❌var path = require('path');
+import path from 'node:path'
+
 //sirve para manejar las cookies
-var cookieParser = require('cookie-parser');
+//❌var cookieParser = require('cookie-parser');
+import cookieParser from 'cookie-parser'
+
 //importa modulos para manejar logs
-var logger = require('morgan');
+//❌var logger = require('morgan');
+
+import logger from 'morgan'
+
+//importando a biblioteca
+import createDebug from "debug"
+
+import { fileURLToPath} from 'node:url'
+import { dirname} from 'node:path'
+
+//creacion del objeto debug
+const debug = createDebug('dswssr-2026:server')
+
+//creando las variables 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+
 //importan las rutas de la aplicacion
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var indexRouter = require('./routes/index');
+import indexRouter from './routes/index.js'
+//var usersRouter = require('./routes/users');
+import usersRouter from './routes/users.js'
 
 //crea la aplicacion de express
+debug("🔨 Creando backend")
 var app = express();
 
 // view engine setup
@@ -25,9 +54,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//configurar la carpeta de archivos estaticos
+debug("🔨Creando servidor de archivos estaticos")
 app.use(express.static(path.join(__dirname,'..', 'public')));
 
 //registramos rutas
+debug("🛤️Registrando rutas")
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -47,4 +79,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+//module.exports = app;
+export default app;
