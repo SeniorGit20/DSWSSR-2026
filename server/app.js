@@ -5,7 +5,7 @@ import createError from 'http-errors'
 //importa el framework express
 //❌var express = require('express');
 
-import express from 'expres'
+import express from 'express'
 //importa modulos para manejar rutas
 
 //❌var path = require('path');
@@ -20,9 +20,19 @@ import cookieParser from 'cookie-parser'
 
 import logger from 'morgan'
 
+import { fileURLToPath} from 'node:url'
+import { dirname} from 'node:path'
+
+//creando las variables 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+
 //importan las rutas de la aplicacion
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var indexRouter = require('./routes/index');
+import indexRouter from './routes/index.js'
+//var usersRouter = require('./routes/users');
+import usersRouter from './routes/users.js'
 
 //crea la aplicacion de express
 var app = express();
@@ -59,4 +69,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+//module.exports = app;
+export default app;
