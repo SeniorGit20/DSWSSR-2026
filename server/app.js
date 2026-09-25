@@ -20,8 +20,14 @@ import cookieParser from 'cookie-parser'
 
 import logger from 'morgan'
 
+//importando a biblioteca
+import createDebug from "debug"
+
 import { fileURLToPath} from 'node:url'
 import { dirname} from 'node:path'
+
+//creacion del objeto debug
+const debug = createDebug('dswssr-2026:server')
 
 //creando las variables 
 const __filename = fileURLToPath(import.meta.url)
@@ -35,6 +41,7 @@ import indexRouter from './routes/index.js'
 import usersRouter from './routes/users.js'
 
 //crea la aplicacion de express
+debug("🔨 Creando backend")
 var app = express();
 
 // view engine setup
@@ -47,9 +54,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//configurar la carpeta de archivos estaticos
+debug("🔨Creando servidor de archivos estaticos")
 app.use(express.static(path.join(__dirname,'..', 'public')));
 
 //registramos rutas
+debug("🛤️Registrando rutas")
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
