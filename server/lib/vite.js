@@ -4,6 +4,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import { fileURLToPath} from 'node:url'
+import { dirname} from 'node:path'
+
+import { fileURLToPath} from 'node:url'
 //creando las variables de rutas
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -42,4 +45,47 @@ export function viteAssets(){
         console.warn("Vite manifest not found. Run 'npm run build")
         return ''
     }
+    //leyendo y parseando el archivo de manifiesto que maneja vite en
+    // la compilacion de los archivos del front end
+
+    const manifest = JSON.parce(fs.readfileSync(manifestPath,'utf-8'))
+    const mainEntry = manifest ['main.js']
+
+    if(!mainEntry){
+        console.warn('Archivo main.js no esta disponible en el manifiesto de Vite')
+        return ''
+    }
+
+    let tags = '';
+    // css files
+    if(mainEntry.css){
+        mainEntry.css.forEach(cssfile =>{
+            tags += `<link rel="stylesheet" href="/$
+           {cssfile}">\n`
+        });
+    }
+
+    // JS file
+    tags += `<script type = "module" src="/${mainEntry.file}" defer></scripts>`;
+    return tags;
 }
+    /*
+    *funcion registradora del helper de mandlebars
+    */
+
+    export function registerViteHelper(hbs){
+        hbs.registerhelper('ViteAssets', ()=> {
+            //sanitizando la salida del helper
+            return new hbs.SafeString(viteAssets())
+        })
+    }
+    
+
+
+
+
+
+
+
+
+

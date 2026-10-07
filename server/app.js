@@ -25,6 +25,8 @@ import createDebug from "debug"
 
 import { fileURLToPath} from 'node:url'
 import { dirname} from 'node:path'
+//importando el template engine handlebars
+import hsb from 'hbs'
 
 //creacion del objeto debug
 const debug = createDebug('dswssr-2026:server')
@@ -40,6 +42,9 @@ import indexRouter from './routes/index.js'
 //var usersRouter = require('./routes/users');
 import usersRouter from './routes/users.js'
 
+//importando el registrador del helper
+import {registerViteHelper} from './lib/vite.js'
+
 //crea la aplicacion de express
 debug("🔨 Creando backend")
 var app = express();
@@ -49,11 +54,20 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+//registro del helper
+registerViteHelper(hbs)
+
 //configura los midelwares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//archivos estaticos para modo produccion
+if(process.env.NODE_ENV == 'production'){
+  app.use(express.static(path.join(__dirname,'..', 'dist')));
+}
+
 //configurar la carpeta de archivos estaticos
 debug("🔨Creando servidor de archivos estaticos")
 app.use(express.static(path.join(__dirname,'..', 'public')));
