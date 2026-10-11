@@ -1,79 +1,64 @@
 //funcion para manejar errores
-//❌var createError = require('http-errors');
 import createError from 'http-errors'
-
 //importa el framework express
-//❌var express = require('express');
-
 import express from 'express'
-//importa modulos para manejar rutas
-
-//❌var path = require('path');
+//imporeta modulos para importar rutas
 import path from 'node:path'
-
-//sirve para manejar las cookies
-//❌var cookieParser = require('cookie-parser');
-import cookieParser from 'cookie-parser'
-
+//importa modulos para manejar cookies
+import cookieParser from 'cookie-parser';
 //importa modulos para manejar logs
-//❌var logger = require('morgan');
-
 import logger from 'morgan'
+//importando debug
+import importdebug from 'debug'
+//imports para crear Dirname
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+//importando el template engine Handlebars
+import hbs from 'hbs'
 
-//importando a biblioteca
-import createDebug from "debug"
+//ejecutando importdebug
+const debug = importdebug('dwssr-2026b:server')
+debug("🔨 creando backend")
 
-import { fileURLToPath} from 'node:url'
-import { dirname} from 'node:path'
-//importando el template engine handlebars
-import hsb from 'hbs'
 
-//creacion del objeto debug
-const debug = createDebug('dswssr-2026:server')
-
-//creando las variables 
+//creando las variables de rutas
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-
-//importan las rutas de la aplicacion
-//var indexRouter = require('./routes/index');
+//importa las rutas de la aplicacion
 import indexRouter from './routes/index.js'
-//var usersRouter = require('./routes/users');
 import usersRouter from './routes/users.js'
-
 //importando el registrador del helper
 import {registerViteHelper} from './lib/vite.js'
 
 //crea la aplicacion de express
-debug("🔨 Creando backend")
-var app = express();
+const app = express();
 
-// view engine setup
-//configura el motor de las vistas
+
+
+// view engine setup, configura el motor de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
-//registro del helper
+//registro helper
 registerViteHelper(hbs)
 
-//configura los midelwares
+//configurar middelwares de la aplicacion
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//archivos estaticos para modo produccion
+//archivos estaticos para produccion
 if(process.env.NODE_ENV == 'production'){
-  app.use(express.static(path.join(__dirname,'..', 'dist')));
+  app.use(express.static(path.join(__dirname, '..','dist')));
 }
 
-//configurar la carpeta de archivos estaticos
-debug("🔨Creando servidor de archivos estaticos")
-app.use(express.static(path.join(__dirname,'..', 'public')));
 
-//registramos rutas
-debug("🛤️Registrando rutas")
+debug("🔨 creando servidor de archivos estaticos")
+//configura la ruta de archivos estaticos
+app.use(express.static(path.join(__dirname, '..','public')));
+
+debug("🛤️  registrando rutas")
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -93,5 +78,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//module.exports = app;
 export default app;
