@@ -2,9 +2,21 @@
   "name": "dswssr-2026",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "PORT=3000 DEBUG=DSWSSR-2026:* node ./bin/www",
-    "greet": "echo ´hola Mundo´"
+    "start": "NODE_ENV=production node ./server/bin/www.js",
+    "dev": "DEBUG=dswssr-2026:* nodemon ./server/bin/www.js",
+    "dev:vite": "vite",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:vite\"",
+    "build": "vite build",
+    "preview": "npm run build && npm start",
+    "greet": "echo ´hola Mundo´",
+    "Lint:all":"npm run Lint:back && npm run lint:front",
+    "Lint:back":"eslint \"server/**/*.js\"",
+    "Lint:front":"eslint \"src/**/.js\"",
+    "Lint:fix":"eslint . --fix"
+
+    
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,5 +25,14 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^10.0.5",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.13.0",
+    "nodemon": "^3.1.14",
+    "vite": "^8.3.2"
   }
 }
