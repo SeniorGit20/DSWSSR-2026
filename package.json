@@ -12,7 +12,7 @@
     "preview": "npm run build && npm start",
     "greet": "echo ´hola Mundo´",
     "Lint:all":"npm run Lint:back && npm run lint:front",
-    "Lint:back":"esLint \"server/**/*.js\"",
+    "Lint:back":"eslint \"server/**/*.js\"",
     "Lint:front":"eslint \"src/**/.js\"",
     "Lint:fix":"eslint . --fix"
 

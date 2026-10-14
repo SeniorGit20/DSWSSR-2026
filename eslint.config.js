@@ -15,7 +15,7 @@ export default defineConfig([
 
   // 2) coding del back.end
 
-  { files: ["server/**/*.{js}"], 
+  { files: ["server/**/*.js"], 
     plugins: { js }, 
     extends: ["js/recommended"], 
     languageOptions: { 
@@ -54,6 +54,19 @@ export default defineConfig([
         }
        } 
       },
+
+    {
+    // ... tus otras propiedades anteriores aquí ...
+    rules: {
+      "no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ]
+    }
+  },
+
       // 2.1) config de vite
 
   { files: ["vite.config.js"], 
