@@ -11,12 +11,10 @@
     "build": "vite build",
     "preview": "npm run build && npm start",
     "greet": "echo ´hola Mundo´",
-    "Lint:all":"npm run Lint:back && npm run lint:front",
-    "Lint:back":"eslint \"server/**/*.js\"",
-    "Lint:front":"eslint \"src/**/.js\"",
-    "Lint:fix":"eslint . --fix"
-
-    
+    "Lint:all": "npm run Lint:back && npm run lint:front",
+    "Lint:back": "eslint \"server/**/*.js\"",
+    "Lint:front": "eslint \"src/**/.js\"",
+    "Lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -27,12 +25,17 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
     "concurrently": "^10.0.5",
-    "eslint": "^10.12.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
     "globals": "^17.13.0",
     "nodemon": "^3.1.14",
+    "tailwindcss": "^4.3.3",
     "vite": "^8.3.2"
   }
 }

@@ -3,14 +3,19 @@ import {defineConfig} from 'vite'
 
 import {resolve}  from 'node:path'
 
+//importando tailwind
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineConfig({
     //directorio raiz de los archivos fuente del front.end
     root:'src',
+    //agregando a vite el plugin de tailwind
+    plugins:[ tailwindcss()],
     //configurando un servidor de desarrollo
     server:{
         //puerto de escucha
         port:5173,
-        // rigidez del puerto
+        // rigidez del puertoP
         strict: true
 
     },
