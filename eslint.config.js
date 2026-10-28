@@ -80,6 +80,13 @@ export default defineConfig([
          ...globals.node}
        } 
       },
+    {
+      files: ['src/**/*.{js,mjs}'],
+      rules: {
+        'no-console': ['warn', { allow: ['warn','error','info']}]
+      }
+    }
 
       
 ]);
+
