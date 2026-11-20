@@ -1,22 +1,31 @@
+import homeRouter from '../modules/home/home.routes.js'
+import diagRouter from '../modules/diagnostics/diagnostics.routes.js';
 
- import usersRouter from './modules/users/users.routes.js'
+ 
+//export default homeRouter
 
- export default usersRouter;
+export {
+  homeRouter,
+  diagRouter,
+}
 
-//  */ import express from 'express';
-// const router = express.Router();
 
+ex
+// import express from 'express';
+// import logger from '../lib/winston.js';
+ 
+// const indexRouter = express.Router();
+ 
 // let counter = 0;
 // const numbers = []
-
+ 
 // /* GET home page. */
-// router.get('/', function(req, res, _next) {
-//   counter++;
+// // eslint-disable-next-line
+// indexRouter.get('/', function(req, res, next) {
+//   counter+=1;
 //   numbers.push(counter)
-//   res.render('index', { title: 'Rodrigo Florian',
+//   res.render('index', { title: 'Jose Armando',
 //     counter,
 //     numbers
 //   });
-// });
-
-// export default router; 
+// })
